@@ -20,7 +20,7 @@ tabs:
 search:
   hint: search
   cancel: Cancel
-  no_results: Oops! No results found.
+  no_results: 검색 결과가 없습니다.
 
 panel:
   lastmod: Recently Updated
