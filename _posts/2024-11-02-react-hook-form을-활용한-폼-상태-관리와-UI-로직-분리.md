@@ -32,7 +32,7 @@ export const Form = ({ methods, children, ...props }) => {
 }
 
 // 사용 예시
-const { handleSubmit } = useForm({ defaultValues: { email: '', password: '' } });
+const { handleSubmit } = useForm({ defaultValues: { email: '', password: '' } })
 <Form methods={useForm()} onSubmit={handleSubmit(onSubmit)}>
   <Form.Text name="email" placeholder="이메일" />
   <Form.Password name="password" placeholder="비밀번호" />
