@@ -28,12 +28,17 @@ export const Form = ({ methods, children, ...props }) => {
     <FormProvider {...methods}>
       <form {...props}>{children}</form>
     </FormProvider>
-  )
-}
+  );
+};
 
 // 사용 예시
-const { handleSubmit } = useForm({ defaultValues: { email: '', password: '' } })
-<Form methods={useForm()} onSubmit={handleSubmit(onSubmit)}>
+const methods = useForm({
+  defaultValues: { email: '', password: '' }
+});
+
+const { handleSubmit } = methods;
+
+<Form methods={methods} onSubmit={handleSubmit(onSubmit)}>
   <Form.Text name="email" placeholder="이메일" />
   <Form.Password name="password" placeholder="비밀번호" />
   <button type="submit">로그인</button>
