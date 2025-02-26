@@ -5,6 +5,8 @@ categories: [react-hook-form]
 tags: [react-hook-form, 컴파운드 패턴]
 ---
 
+> 이 글은 `react-hook-form: "^7.54.2"` 버전을 기반으로 작성되었습니다.
+
 ## 기존 문제점과 개선 목표
 
 기존에는 폼 상태와 UI 로직이 뒤섞여 코드 가독성과 유지보수성이 떨어졌습니다. <br/>
