@@ -1,6 +1,6 @@
 ---
 title: Tanstack Query로 권한 제어 강화된 그룹 관리
-date: 2025-09-30 12:15:00 +09:00
+date: 2024-09-30 12:15:00 +09:00
 categories: [권한 제어]
 tags: [Tanstack Query, 권한 제어]
 ---
@@ -68,8 +68,7 @@ const isAdmin = groupData && userData
   : false;
 ```
 
-- 어떻게: `groupData.members` 배열을 순회하며 현재 사용자(`userData.data.id`)와 역할(`role === 'ADMIN'`)을 비교
-- 가정: `userData.data.id`는 API 응답의 사용자 ID 필드
+`groupData.members` 배열을 순회하며 현재 사용자(`userData.data.id`)와 역할(`role === 'ADMIN'`)을 비교
 
 ### 3. 권한 기반 UI 동적 제어
 `isAdmin` 값을 기준으로 UI를 동적으로 조정하며, SRP를 적용해 권한 로직과 렌더링을 분리했습니다.
@@ -116,8 +115,7 @@ export const useCreateGroupMutation = () => {
 };
 ```
 
-- 어떻게: 그룹 생성 후 `invalidateQueries`로 캐시 무효화, 서버에서 최신 `groupData`와 `userData` 재조회
-- 이점: 비관리자가 캐시된 권한으로 작업 시도 방지, 일관성 유지
+그룹 생성 후 `invalidateQueries`로 캐시 무효화, 서버에서 최신 `groupData`와 `userData` 재조회. 비관리자가 캐시된 권한으로 작업 시도 방지, 일관성 유지
 
 ## 결과
 SRP와 캐시 전략으로 코드 수정 용이성을 증가시키며, `isAdmin`을 기반으로 권한 제어 로직을 구현하여 특정 작업을 수행할 수 있는 사용자와 없는 사용자를 명확하게 구분했습니다.
