@@ -9,10 +9,12 @@ tags: [react-hook-form, 컴파운드 패턴]
 
 ## 기존 문제점과 개선 목표
 
-이전 프로젝트에서 회원가입 폼을 구현할 때, 상태 관리와 UI 로직이 뒤섞여 가독성과 유지보수성이 떨어졌습니다. 
+이전 프로젝트에서 회원가입 폼을 구현할 때, 상태 관리와 UI 로직이 뒤섞여 가독성과 유지보수성이 떨어졌습니다. <br/>
 예를 들어, 아래처럼 `useState`와 이벤트 핸들러로 직접 관리하던 방식은 몇 가지 불편함을 초래했습니다.
 
 ```tsx
+// react-hook-form 적용 전 회원가입 폼
+
 export const SignupPage = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
