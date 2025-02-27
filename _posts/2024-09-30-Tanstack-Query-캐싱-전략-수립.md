@@ -79,7 +79,6 @@ const isAdmin = groupData && userData
 {isAdmin && (
   <button
     onClick={handleOpenInviteModal}
-    ...
   >
     새로운 멤버 초대하기
   </button>
