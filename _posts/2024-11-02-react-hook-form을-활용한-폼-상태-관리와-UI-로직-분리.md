@@ -9,8 +9,45 @@ tags: [react-hook-form, 컴파운드 패턴]
 
 ## 기존 문제점과 개선 목표
 
-기존에는 폼 상태와 UI 로직이 뒤섞여 코드 가독성과 유지보수성이 떨어졌습니다. <br/>
-이를 해결하기 위해 SRP(단일 책임 원칙)를 적용하며 `react-hook-form`을 도입하고 컴포넌트를 최적화해 다음 목표를 세웠습니다.
+이전 프로젝트에서 회원가입 폼을 구현할 때, 상태 관리와 UI 로직이 뒤섞여 가독성과 유지보수성이 떨어졌습니다. 
+예를 들어, 아래처럼 `useState`와 이벤트 핸들러로 직접 관리하던 방식은 몇 가지 불편함을 초래했습니다.
+
+```tsx
+export const SignupPage = () => {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormState((prev) => ({ ...prev, [id]: value }));
+    setErrors((prev) => ({ ...prev, [id]: '' }));
+  };
+
+  const handleBlur = (e) => {
+    const { id, value } = e.target;
+    setErrors((prev) => ({ ...prev, [id]: getErrorMessage(id, value) }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // 유효성 검사 및 API 호출
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input id="email" value={formState.email} onChange={handleChange} onBlur={handleBlur} />
+      <Input id="password" value={formState.password} onChange={handleChange} onBlur={handleBlur} />
+      <button type="submit">가입하기</button>
+    </form>
+  );
+};
+```
+
+- 상태와 UI 로직 혼재: `formState`와 `errors`를 `useState`로 관리하며, `handleChange`, `handleBlur`, `handleSubmit`에서 유효성 검사와 상태 업데이트가 뒤섞여 코드가 복잡해졌습니다.
+- 중복 코드: 각 입력 필드마다 `onChange`와 `onBlur`를 반복 작성하며 로직이 분산됐고, SRP를 지키기 어려웠습니다.
+- 확장성 부족: 새로운 입력 필드(예: 라디오 버튼)를 추가할 때마다 상태와 유효성 로직을 반복 구현해야 했습니다. <br/>
+
+이를 해결하기 위해 SRP를 적용하며 `react-hook-form`을 도입해 다음 목표를 세웠습니다.
 
 - 폼 상태를 외부로 분리해 UI를 단순화
 - 공통 컴포넌트와 컴파운드 패턴으로 재사용성 강화
@@ -50,7 +87,8 @@ const { handleSubmit } = methods;
 
 ### 2. 컴파운드 패턴으로 입력 필드 개선
 
-폼 안에서 `input`과 `label` 등 반복적인 구조가 발견됐고, 일부 폼은 스타일링 측면에서 `label`과 `input`의 관계가 달라지는 경우가 있어 이를 어떻게 처리할지 고민했습니다.
+폼 안에서 `input`과 `label` 등 반복적인 구조가 발견됐고, 일부 폼은 스타일링 측면에서 `label`과 `input`의 관계가 달라지는 경우가 있어 이를 어떻게 처리할지 고민했습니다. <br/>
+예를 들어, 로그인 폼은 `label`이 위쪽에, 마이페이지 폼은 왼쪽에 위치해야 했는데, 컴파운드 패턴으로 이를 유연하게 처리했습니다. <br/>
 SRP를 적용해 각 컴포넌트가 단일 책임을 지도록, 컴파운드 패턴을 도입해 입력 필드를 공통화하고 유연성을 확보했습니다.
 
 ```tsx
