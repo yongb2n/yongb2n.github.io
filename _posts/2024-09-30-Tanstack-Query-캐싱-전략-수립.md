@@ -87,7 +87,7 @@ const isAdmin = groupData && userData
 
 - 확장: 수정/삭제 버튼도 동일 로직 적용
 ```tsx
- {isAdmin && (
+{isAdmin && (
   <div>
     <button onClick={handleEditNotificationModal}>
       <Image src={editIcon} alt="수정" width={16} height={16} />
