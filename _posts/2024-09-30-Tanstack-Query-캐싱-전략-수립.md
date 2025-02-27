@@ -1,6 +1,6 @@
 ---
 title: Tanstack Query로 권한 제어 강화된 그룹 관리
-date: 2025-02-25 12:15:00 +09:00
+date: 2025-09-29 12:15:00 +09:00
 categories: [권한 제어]
 tags: [Tanstack Query, 권한 제어]
 ---
