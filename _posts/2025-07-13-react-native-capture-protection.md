@@ -6,7 +6,7 @@ author: "Bean"
 category: "development"
 tags: ["React Native", "오픈소스 기여", "개발 회고"]
 ---
-## 시작: iOS에서 화면 캡처를 막고 싶었다
+## iOS에서 화면 캡처를 막고 싶었다
 
 iOS에서 민감한 정보를 다루는 앱이라면, 화면 캡처나 녹화를 막는 기능은 필수입니다.  
 React Native 환경에서 이 기능을 구현하고자 했던 우리는 하나의 라이브러리를 발견하게 되죠.
